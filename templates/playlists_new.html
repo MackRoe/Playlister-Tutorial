@@ -3,42 +3,7 @@
 
 {% block content %}
 <form method='POST' action='/playlists'>
-    <fieldset>
-    <legend>New Playlist</legend>
-    <!-- TITLE -->
-    <p>
-        <label for='title'>Title</label>
-        <input type='text' name='title' />
-    </p>
-    <!-- DESCRIPTION -->
-    <p>
-        <label for='description'>Description</label>
-        <input type='text' name='description' />
-    </p>
-    
-    <!-- VIDEO LINKS -->
-    <p>
-        <label for='playlist-videos'>playlist-videos</label>
-        <p>Add videos in the form of 'https://youtube.com/embed/KEY'. Separate with a new line.</p>
-        <textarea id='playlist-videos' name='videos' rows='10'></textarea>
-    </p>
-    <!-- RATING -->
-    <p>
-        <label for='playlist-rating'>playlist-rating</label>
-        <p>Rate it</p>
-        <select id="playlist-rating" name='rating'>
-            <option value="1">☆</option>
-            <option value="2">☆☆</option>
-            <option value="3">☆☆☆</option>
-            <option value="4">☆☆☆☆</option>
-            <option value="5">☆☆☆☆☆</option>
-        </select>
-    </p>
-
-    <!-- BUTTON -->
-    <p>
-        <button type='submit'>Save Playlist</button>
-    </p>
+    {% include 'partials/playlists_form.html' %}
 </form>
-</fieldset>
+
 {% endblock %}
