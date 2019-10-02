@@ -5,6 +5,7 @@ from bson.objectid import ObjectId
 client = MongoClient()
 db = client.Playlister
 playlists = db.playlists
+comments = db.comments
 
 app = Flask(__name__)
 
