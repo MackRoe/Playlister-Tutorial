@@ -1,5 +1,3 @@
-# tests.py
-
 from unittest import TestCase, main as unittest_main, mock
 from bson.objectid import ObjectId
 from app import app
@@ -72,6 +70,20 @@ class PlaylistsTests(TestCase):
         # After submitting, should redirect to that playlist's page
         self.assertEqual(result.status, '302 FOUND')
         mock_insert.assert_called_with(sample_playlist)
+
+    @mock.patch('pymongo.collection.Collection.update_one')
+    def test_update_playlist(self, mock_update):
+        result = self.client.post(f'/playlists/{sample_playlist_id}', data=sample_form_data)
+
+        self.assertEqual(result.status, '302 FOUND')
+        mock_update.assert_called_with({'_id': sample_playlist_id}, {'$set': sample_playlist})
+
+    @mock.patch('pymongo.collection.Collection.delete_one')
+    def test_delete_playlist(self, mock_delete):
+        form_data = {'_method': 'DELETE'}
+        result = self.client.post(f'/playlists/{sample_playlist_id}/delete', data=form_data)
+        self.assertEqual(result.status, '302 FOUND')
+        mock_delete.assert_called_with({'_id': sample_playlist_id})
 
 if __name__ == '__main__':
     unittest_main()
