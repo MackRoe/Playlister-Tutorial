@@ -4,7 +4,8 @@ from bson.objectid import ObjectId
 import os
 from datetime import datetime
 
-host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Playlister')
+host = os.environ.get('MONGODB_URI', 'mongodb://host.docker.internal:27017/Playlister')
+# replace localhost with host.docker.internal:27017 for dockerization
 client = MongoClient(host=f'{host}?retryWrites=false')
 
 db = client.get_default_database()
