@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  db:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME: root
+  web:
+    build: "."
+    command: "flask run --host=0.0.0.0"
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
